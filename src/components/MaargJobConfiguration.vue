@@ -48,7 +48,7 @@
         <ion-button size="small" fill="outline" color="danger" :disabled="!hasPermission(Actions.APP_JOB_UPDATE) || !hasJobPermission(Actions.APP_MAARG_JOB_STATUS_UPDATE) || currentMaargJob.paused === 'Y' || isRefreshRequired" @click="cancelJob(currentMaargJob)">{{ translate("Disable") }}</ion-button>
       </div>
       <div>
-        <ion-button v-if="currentMaargJob.paused === 'Y'" :disabled="!hasPermission(Actions.APP_JOB_UPDATE) || !hasJobPermission(Actions.APP_MAARG_JOB_PARAMETERS_UPDATE)" size="small" fill="outline" @click="enableJob()">{{ translate("Enable") }}</ion-button>
+        <ion-button v-if="currentMaargJob.paused === 'Y'" :disabled="!hasPermission(Actions.APP_JOB_UPDATE) || !hasJobPermission(Actions.APP_MAARG_JOB_STATUS_UPDATE)" size="small" fill="outline" @click="enableJob()">{{ translate("Enable") }}</ion-button>
         <ion-button v-else :disabled="!hasPermission(Actions.APP_JOB_UPDATE) || isRefreshRequired || !isCronExpressionUpdated()" size="small" fill="outline" @click="saveChanges()">{{ translate("Save changes") }}</ion-button>
       </div>
     </div>
@@ -190,7 +190,7 @@ export default defineComponent({
                     }
                     clonedJob.serviceJobParameters.find((parameter: any) => {
                       if(parameter.parameterName === "productStoreIds") {
-                        parameter.paramterValue = this.currentEComStore.productStoreIds
+                        parameter.parameterValue = this.currentEComStore.productStoreId
                         return true;
                       }
                       return false;
@@ -328,7 +328,7 @@ export default defineComponent({
         }
         clonedJob.serviceJobParameters.find((parameter: any) => {
           if(parameter.parameterName === "productStoreIds") {
-            parameter.paramterValue = this.currentEComStore.productStoreIds
+            parameter.parameterValue = this.currentEComStore.productStoreId
             return true;
           }
           return false;
